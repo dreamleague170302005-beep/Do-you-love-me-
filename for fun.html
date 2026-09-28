@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هل تحبني؟ ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti CDN for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #feada6 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glassmorphism styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(235, 87, 87, 0.25);
+        }
+
+        /* Floating background elements */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.4);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
+        }
+
+        /* Pulse Heart Animation */
+        .heart-beat {
+            display: inline-block;
+            animation: heartbeat 1.2s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        /* Evasive No Button Transitions */
+        #no-btn {
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s;
+            position: relative;
+            z-index: 50;
+        }
+
+        /* Dancing element animations */
+        .bounce-dance {
+            animation: bounceDance 0.8s infinite alternate ease-in-out;
+        }
+
+        .wiggle-dance {
+            animation: wiggleDance 0.6s infinite alternate ease-in-out;
+        }
+
+        @keyframes bounceDance {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes wiggleDance {
+            0% { transform: scale(1) rotate(-8deg); }
+            100% { transform: scale(1.08) rotate(8deg); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 15px rgba(236, 72, 153, 0.6), 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 overflow-hidden">
+
+    <!-- Background Floating Hearts -->
+    <div class="bg-heart text-4xl" style="top: 10%; left: 10%; animation-delay: 0s;"><i class="fa-solid fa-heart"></i></div>
+    <div class="bg-heart text-6xl" style="top: 70%; left: 80%; animation-delay: 1s;"><i class="fa-solid fa-heart"></i></div>
+    <div class="bg-heart text-3xl" style="top: 80%; left: 15%; animation-delay: 2s;"><i class="fa-solid fa-heart"></i></div>
+    <div class="bg-heart text-5xl" style="top: 20%; left: 85%; animation-delay: 1.5s;"><i class="fa-solid fa-heart"></i></div>
+    <div class="bg-heart text-2xl" style="top: 40%; left: 5%; animation-delay: 2.5s;"><i class="fa-solid fa-heart"></i></div>
+
+    <main class="w-full max-w-lg relative z-10">
+        <!-- Initial Question Card -->
+        <div id="question-card" class="glass-card rounded-3xl p-8 md:p-10 text-center transition-all duration-500 transform hover:scale-[1.01]">
+            
+            <!-- Top Cute Illustration / Emoji Header -->
+            <div class="mb-6 relative inline-block">
+                <div class="w-28 h-28 md:w-36 md:h-36 bg-pink-100 rounded-full flex items-center justify-center mx-auto border-4 border-white shadow-inner">
+                    <span class="text-6xl md:text-7xl heart-beat">🐱❤️</span>
+                </div>
+                <span class="absolute -bottom-2 -right-2 bg-pink-500 text-white text-xs px-3 py-1 rounded-full font-bold shadow-md">
+                    سؤال مهم! ✨
+                </span>
+            </div>
+
+            <!-- Question Title -->
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4 tracking-wide leading-tight">
+                هل تحبني؟ <span class="heart-beat text-rose-500"><i class="fa-solid fa-heart"></i></span>
+            </h1>
+            
+            <p class="text-gray-600 text-sm md:text-base mb-8 font-medium">
+                جاوب الصدق بلاش لف ودوران! 😉
+            </p>
+
+            <!-- Action Buttons Container -->
+            <div id="buttons-wrapper" class="relative min-h-[140px] flex flex-col md:flex-row items-center justify-center gap-6">
+                <!-- YES BUTTON -->
+                <button id="yes-btn" onclick="celebrateLove()" class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white font-black text-xl rounded-2xl shadow-lg hover:shadow-emerald-300/50 transform hover:-translate-y-1 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3 border-2 border-emerald-200">
+                    <i class="fa-solid fa-heart-circle-check text-2xl"></i>
+                    <span>نـعـم! ❤️</span>
+                </button>
+
+                <!-- NO BUTTON (The Evasive Button) -->
+                <button id="no-btn" class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-rose-400 to-red-500 text-white font-bold text-xl rounded-2xl shadow-md transition-all duration-150 flex items-center justify-center gap-2 border-2 border-rose-200 cursor-pointer">
+                    <i class="fa-solid fa-face-frown text-xl"></i>
+                    <span id="no-btn-text">لا 💔</span>
+                </button>
+            </div>
+            
+            <!-- Teasing message tooltip for No Button -->
+            <div id="tease-toast" class="opacity-0 transition-opacity duration-300 mt-4 text-xs font-bold text-rose-600 bg-rose-100/80 py-1.5 px-4 rounded-full inline-block">
+                مفيش مفر من الحب! 😜
+            </div>
+        </div>
+
+        <!-- Celebration Screen (Initially Hidden) -->
+        <div id="celebration-card" class="hidden glass-card rounded-3xl p-8 text-center transition-all duration-700 transform scale-90 opacity-0">
+            
+            <!-- Main Cool Cat with Sunglasses Image -->
+            <div class="relative mb-6 inline-block">
+                <div class="relative z-10 w-44 h-44 md:w-52 md:h-52 mx-auto rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-pink-100 flex items-center justify-center">
+                    <!-- SVG Cool Cat with Sunglasses -->
+                    <svg viewBox="0 0 200 200" class="w-full h-full bounce-dance">
+                        <!-- Cat Body & Head -->
+                        <path d="M 50,160 Q 50,120 100,120 Q 150,120 150,160 Z" fill="#f59e0b"/>
+                        <!-- Ears -->
+                        <polygon points="45,65 25,10 75,40" fill="#d97706"/>
+                        <polygon points="155,65 175,10 125,40" fill="#d97706"/>
+                        <polygon points="48,60 35,22 70,42" fill="#fef3c7"/>
+                        <polygon points="152,60 165,22 130,42" fill="#fef3c7"/>
+                        <!-- Head Circle -->
+                        <circle cx="100" cy="85" r="55" fill="#fbbf24"/>
+                        <!-- Snout -->
+                        <ellipse cx="100" cy="98" rx="16" ry="12" fill="#fff"/>
+                        <polygon points="95,93 105,93 100,100" fill="#f43f5e"/>
+                        <!-- Whiskers -->
+                        <line x1="60" y1="95" x2="30" y2="90" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="60" y1="102" x2="32" y2="105" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="140" y1="95" x2="170" y2="90" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="140" y1="102" x2="168" y2="105" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Smirk Mouth -->
+                        <path d="M 92,104 Q 100,112 108,104" fill="none" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+                        <!-- COOL SUNGLASSES -->
+                        <path d="M 45,70 L 98,70 L 95,90 L 52,90 Z" fill="#111827"/>
+                        <path d="M 102,70 L 155,70 L 148,90 L 105,90 Z" fill="#111827"/>
+                        <line x1="95" y1="75" x2="105" y2="75" stroke="#111827" stroke-width="5"/>
+                        <!-- Sunglasses Shine Effect -->
+                        <line x1="52" y1="74" x2="72" y2="86" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
+                        <line x1="109" y1="74" x2="129" y2="86" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
+                        <!-- Bowtie -->
+                        <polygon points="85,135 100,142 85,150" fill="#ef4444"/>
+                        <polygon points="115,135 100,142 115,150" fill="#ef4444"/>
+                        <circle cx="100" cy="142" r="5" fill="#b91c1c"/>
+                    </svg>
+                </div>
+                
+                <!-- Crown overlay -->
+                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 text-5xl wiggle-dance z-20">
+                    👑
+                </div>
+            </div>
+
+            <!-- Primary Celebration Message -->
+            <h2 class="text-3xl md:text-5xl font-black text-rose-600 mb-3 glow-text tracking-tight">
+                طبعاً كنت عارف! 😎❤️
+            </h2>
+
+            <p class="text-lg md:text-xl font-bold text-gray-700 mb-6 leading-relaxed">
+                مين يقدر يقاوم الكاريزما دي أصلاً؟ <br>
+                <span class="text-rose-500 font-extrabold">بحبك جداً أكتر من أي حاجة! 💖✨</span>
+            </p>
+
+            <!-- Dancing Cats Showcase Grid -->
+            <div class="grid grid-cols-3 gap-3 my-6 p-3 bg-white/50 rounded-2xl border border-pink-200">
+                <!-- Cat 1 -->
+                <div class="p-2 text-center bg-pink-100/80 rounded-xl bounce-dance" style="animation-delay: 0.1s;">
+                    <span class="text-4xl block">💃🐱</span>
+                    <span class="text-xs font-bold text-pink-700">رقص!</span>
+                </div>
+                <!-- Cat 2 -->
+                <div class="p-2 text-center bg-pink-100/80 rounded-xl wiggle-dance" style="animation-delay: 0.3s;">
+                    <span class="text-4xl block">😻✨</span>
+                    <span class="text-xs font-bold text-pink-700">حب!</span>
+                </div>
+                <!-- Cat 3 -->
+                <div class="p-2 text-center bg-pink-100/80 rounded-xl bounce-dance" style="animation-delay: 0.5s;">
+                    <span class="text-4xl block">🎶😸</span>
+                    <span class="text-xs font-bold text-pink-700">احتفال!</span>
+                </div>
+            </div>
+
+            <!-- Restart Button -->
+            <button onclick="resetQuestion()" class="mt-4 px-8 py-3 bg-gray-800 hover:bg-black text-white font-bold text-base rounded-xl shadow-lg transform hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 mx-auto">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>نعيد المقلب تاني؟</span>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Teasing phrases when user tries to hit "No" button
+        const teasePhrases = [
+            "ما تقدرش تضغطني! 😜",
+            "حاول تاني! 😂",
+            "مش هتعرف! 🚀",
+            "مفيش مفر! 💖",
+            "قربت بس لاء! 🙈",
+            "زورك رايح فين؟ 🏃‍♂️",
+            "اصبر بس! 🤖",
+            "نعم هي الحل! 👍"
+        ];
+
+        const noBtn = document.getElementById('no-btn');
+        const noBtnText = document.getElementById('no-btn-text');
+        const teaseToast = document.getElementById('tease-toast');
+        const questionCard = document.getElementById('question-card');
+        const celebrationCard = document.getElementById('celebration-card');
+
+        let isEvasiveModeActive = false;
+
+        // Initialize Web Audio API synth sounds (No external audio assets needed!)
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+        }
+
+        // Play playful move pop sound
+        function playPopSound() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch(e) {
+                // Audio fallback silence
+            }
+        }
+
+        // Play happy fanfare melody sound
+        function playVictorySound() {
+            try {
+                initAudio();
+                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C E G C E G
+                notes.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    
+                    const startTime = audioCtx.currentTime + (index * 0.1);
+                    const duration = 0.25;
+                    
+                    gain.gain.setValueAtTime(0, startTime);
+                    gain.gain.linearRampToValueAtTime(0.2, startTime + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.start(startTime);
+                    osc.stop(startTime + duration);
+                });
+            } catch(e) {}
+        }
+
+        // --- EVASIVE BUTTON LOGIC ---
+        function moveNoButton(e) {
+            if (e) e.preventDefault();
+            playPopSound();
+
+            // Switch button to fixed position for free screen floating
+            if (!isEvasiveModeActive) {
+                noBtn.style.position = 'fixed';
+                isEvasiveModeActive = true;
+            }
+
+            const btnWidth = noBtn.offsetWidth || 120;
+            const btnHeight = noBtn.offsetHeight || 50;
+
+            // Padding from viewport edges
+            const padding = 20;
+
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            // Generate random positions within visible screen boundary
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+
+            // Change teasing text randomly
+            const randomPhrase = teasePhrases[Math.floor(Math.random() * teasePhrases.length)];
+            noBtnText.textContent = randomPhrase;
+
+            // Show toast message
+            teaseToast.textContent = randomPhrase;
+            teaseToast.style.opacity = '1';
+        }
+
+        // Attach listeners for both Mouse (Desktop) and Touch/Pointer (Mobile)
+        ['mouseenter', 'touchstart', 'pointerover', 'click'].forEach(eventType => {
+            noBtn.addEventListener(eventType, moveNoButton, { passive: false });
+        });
+
+        // --- CELEBRATION LOGIC ---
+        function celebrateLove() {
+            playVictorySound();
+
+            // Hide Question Card with smooth animation
+            questionCard.classList.add('scale-90', 'opacity-0');
+            
+            setTimeout(() => {
+                questionCard.classList.add('hidden');
+                
+                // Reset No button position
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+                isEvasiveModeActive = false;
+                noBtnText.textContent = "لا 💔";
+
+                // Show Celebration Card
+                celebrationCard.classList.remove('hidden');
+                setTimeout(() => {
+                    celebrationCard.classList.remove('scale-90', 'opacity-0');
+                    celebrationCard.classList.add('scale-100', 'opacity-100');
+                }, 50);
+
+                // Trigger Massive Confetti & Heart Explosion
+                launchConfettiSequence();
+            }, 400);
+        }
+
+        // Confetti Fireworks and Hearts Shower using canvas-confetti library
+        function launchConfettiSequence() {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            // Burst 1: Heart and standard colorful shapes
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+                colors: ['#ff0055', '#ff5050', '#ffb3c6', '#ffffff']
+            });
+            fire(0.2, {
+                spread: 60,
+                colors: ['#38ef7d', '#11998e', '#f43f5e']
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                colors: ['#ffe600', '#ff0066', '#ffffff']
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+
+            // Burst 2: Continuous romantic hearts burst stream for 3 seconds
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // Hearts from left and right corners
+                confetti({
+                    particleCount: Math.floor(particleCount * 0.5),
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#e11d48', '#f43f5e', '#fda4af']
+                });
+                confetti({
+                    particleCount: Math.floor(particleCount * 0.5),
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#e11d48', '#f43f5e', '#fda4af']
+                });
+            }, 250);
+        }
+
+        // --- RESET QUESTION LOGIC ---
+        function resetQuestion() {
+            celebrationCard.classList.remove('scale-100', 'opacity-100');
+            celebrationCard.classList.add('scale-90', 'opacity-0');
+
+            setTimeout(() => {
+                celebrationCard.classList.add('hidden');
+                teaseToast.style.opacity = '0';
+                
+                questionCard.classList.remove('hidden');
+                setTimeout(() => {
+                    questionCard.classList.remove('scale-90', 'opacity-0');
+                    questionCard.classList.add('scale-100', 'opacity-100');
+                }, 50);
+            }, 400);
+        }
+    </script>
+</body>
+</html>
